@@ -9,5 +9,21 @@ data:
   grafana.ini: |-
     instance_name = grafana.expected.sh
 
+    [server]
+    root_url = http://grafana:3000
+
     [metrics]
     enabled = true
+
+    [auth.generic_oauth]
+    name = BitBucket
+    enabled = true
+    allow_sign_up = true
+    client_id = AEbLwQpUA5sUvcC3a3
+    client_secret = XrZwV2vAuTA3ygAChas3Mu8vm7e2UV52
+    scopes = account email team
+    auth_url = https://bitbucket.org/site/oauth2/authorize
+    token_url = https://bitbucket.org/site/oauth2/access_token
+    api_url = https://api.bitbucket.org/2.0/user
+    team_ids =
+    allowed_organizations =

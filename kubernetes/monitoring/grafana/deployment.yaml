@@ -21,6 +21,13 @@ spec:
             - name: ui
               containerPort: 3000
               hostPort: 3000
+          volumeMounts:
+            - name: config
+              mountPath: /etc/grafana
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: admin
+      volumes:
+        - name: config
+          configMap:
+            name: grafana
