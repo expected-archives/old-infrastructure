@@ -8,7 +8,7 @@ metadata:
   annotations:
     prometheus.io/scrape: "true"
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: prometheus
   ports:
