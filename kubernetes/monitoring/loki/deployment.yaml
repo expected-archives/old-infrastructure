@@ -18,7 +18,7 @@ spec:
       serviceAccountName: loki
       containers:
         - name: loki
-          image: grafana/loki
+          image: grafana/loki:master
           ports:
             - name: http
               containerPort: 3100
@@ -34,3 +34,7 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+      volumes:
+        - name: config
+          configMap:
+            name: loki
