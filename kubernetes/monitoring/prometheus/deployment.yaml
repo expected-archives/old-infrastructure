@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   labels:
     app: prometheus
   name: prometheus
   namespace: monitoring
 spec:
-  serviceName: prometheus
   replicas: 1
   selector:
     matchLabels:
@@ -25,18 +24,25 @@ spec:
         - name: prometheus
           image: prom/prometheus
           ports:
-            - name: ui
+            - name: http
               containerPort: 9090
           volumeMounts:
             - name: config
-              mountPath: /etc/config
+              mountPath: /etc/prometheus
             - name: prometheus
               mountPath: /var/prometheus
           args:
-            - --config.file=/etc/config/prometheus.yaml
+            - --config.file=/etc/prometheus/prometheus.yaml
             - --web.enable-lifecycle
             - --storage.tsdb.path=/var/prometheus
             - --storage.tsdb.retention=1y
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
       volumes:
         - name: config
           configMap:

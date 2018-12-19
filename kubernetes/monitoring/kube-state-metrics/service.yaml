@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus
+  name: kube-state-metrics
   namespace: monitoring
   labels:
-    app: prometheus
+    app: kube-state-metrics
   annotations:
     prometheus.io/scrape: "true"
 spec:
   type: ClusterIP
   selector:
-    app: prometheus
+    app: kube-state-metrics
   ports:
-    - name: http
-      port: 80
-      targetPort: http
+    - name: metrics
+      port: 8080
+      targetPort: metrics
