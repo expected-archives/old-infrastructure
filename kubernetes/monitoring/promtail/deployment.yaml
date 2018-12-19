@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: promtail
+  name: promtail
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: promtail
+  template:
+    metadata:
+      labels:
+        app: promtail
+    spec:
+      serviceAccountName: promtail
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+      containers:
+        - name: promtail
+          image: grafana/promtail:master
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: config
+              mountPath: /etc/promtail
+            - name: log
+              mountPath: /var/log
+            - name: docker
+              mountPath: /var/lib/docker/containers
+          args:
+            - -config.file=/etc/promtail/promtail.yaml
+            - -client.url=http://loki/api/prom/push
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+      volumes:
+        - name: config
+          configMap:
+            name: promtail
+        - name: log
+          hostPath:
+            path: /var/log
+        - name: docker
+          hostPath:
+            path: /var/lib/docker/containers

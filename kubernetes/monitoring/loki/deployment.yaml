@@ -15,13 +15,12 @@ spec:
       labels:
         app: loki
     spec:
-      serviceAccountName: loki
       containers:
         - name: loki
           image: grafana/loki:master
           ports:
             - name: http
-              containerPort: 3100
+              containerPort: 80
           volumeMounts:
             - name: config
               mountPath: /etc/loki
