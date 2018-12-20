@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: kube-state-metrics
   name: kube-state-metrics
   namespace: monitoring
+  labels:
+    app: kube-state-metrics
 spec:
   replicas: 1
   selector:

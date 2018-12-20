@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: drone
   name: drone
   namespace: tools
+  labels:
+    app: drone
 spec:
   replicas: 1
   selector:

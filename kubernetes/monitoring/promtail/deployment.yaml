@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  labels:
-    app: promtail
   name: promtail
   namespace: monitoring
+  labels:
+    app: promtail
 spec:
   selector:
     matchLabels:

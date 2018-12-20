@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: loki
   name: loki
   namespace: monitoring
+  labels:
+    app: loki
 spec:
   replicas: 1
   selector:
