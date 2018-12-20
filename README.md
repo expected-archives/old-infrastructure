@@ -17,3 +17,10 @@ we planning to use for:
 - kafka nodes: 3 x 1-S (1vCPU - 2GB - 50GB - $4) instances on scaleway
 
 total per month: $69
+
+
+### development pricing
+
+- one master on 1-S ($4)
+- one proxy on 1-S ($4)
+- three worker on 1-S ($12)

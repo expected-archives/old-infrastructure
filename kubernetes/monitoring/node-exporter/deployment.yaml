@@ -33,10 +33,10 @@ spec:
           resources:
             limits:
               cpu: 10m
-              memory: 50Mi
+              memory: 64Mi
             requests:
               cpu: 10m
-              memory: 50Mi
+              memory: 64Mi
       volumes:
         - name: proc
           hostPath:

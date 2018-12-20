@@ -10,20 +10,25 @@ data:
     instance_name = grafana.expected.sh
 
     [server]
-    root_url = http://grafana:3000
+    root_url = http://grafana.expected.sh
 
     [metrics]
     enabled = true
 
-    [auth.generic_oauth]
-    name = BitBucket
+    [security]
+    admin_user = remicaumette
+
+    [auth]
+    disable_login_form = true
+    oauth_auto_login = true
+
+    [auth.github]
     enabled = true
     allow_sign_up = true
-    client_id = AEbLwQpUA5sUvcC3a3
-    client_secret = XrZwV2vAuTA3ygAChas3Mu8vm7e2UV52
-    scopes = account email team
-    auth_url = https://bitbucket.org/site/oauth2/authorize
-    token_url = https://bitbucket.org/site/oauth2/access_token
-    api_url = https://api.bitbucket.org/2.0/user
-    team_ids =
-    allowed_organizations =
+    client_id = a475cbc261d7e8de0474
+    client_secret = 562e156e642a52fcbc5753237f22c60e3aa35c6a
+    scopes = user:email,read:org
+    auth_url = https://github.com/login/oauth/authorize
+    token_url = https://github.com/login/oauth/access_token
+    api_url = https://api.github.com/user
+    allowed_organizations = expectedsh

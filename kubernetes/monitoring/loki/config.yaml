@@ -24,6 +24,6 @@ data:
             period: 168h
     storage_config:
       boltdb:
-        directory: /tmp/loki/index
+        directory: /var/loki/index
       filesystem:
-        directory: /tmp/loki/chunks
+        directory: /var/loki/chunks
