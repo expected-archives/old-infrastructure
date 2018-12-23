@@ -1,0 +1,17 @@
+namespace: monitoring
+commonLabels:
+  app: prometheus
+resources:
+  - account.yaml
+  - deployment.yaml
+  - service.yaml
+  - volume.yaml
+configMapGenerator:
+  - name: prometheus
+    files:
+      - config/prometheus.yaml
+imageTags:
+  - name: prom/prometheus
+    newTag: latest
+  - name: jimmidyson/configmap-reload
+    newTag: latest

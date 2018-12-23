@@ -2,18 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: alert-manager
-  namespace: monitoring
-  labels:
-    app: alert-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: alert-manager
   template:
-    metadata:
-      labels:
-        app: alert-manager
     spec:
       securityContext:
         fsGroup: 2000

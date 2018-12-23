@@ -1,0 +1,9 @@
+namespace: monitoring
+commonLabels:
+  app: node-exporter
+resources:
+  - deployment.yaml
+  - service.yaml
+imageTags:
+  - name: prom/node-exporter
+    newTag: latest

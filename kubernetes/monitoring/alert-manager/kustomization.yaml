@@ -1,0 +1,14 @@
+namespace: monitoring
+commonLabels:
+  app: alert-manager
+resources:
+  - deployment.yaml
+  - service.yaml
+  - volume.yaml
+configMapGenerator:
+  - name: alert-manager
+    files:
+      - config/alertmanager.yaml
+imageTags:
+  - name: prom/alertmanager
+    newTag: latest
