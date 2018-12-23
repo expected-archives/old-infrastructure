@@ -9,7 +9,7 @@ resources:
 configMapGenerator:
   - name: grafana
     files:
-      - config/granafa.ini
+      - config/grafana.ini
   - name: grafana-datasources
     files:
       - config/datasources.yaml
@@ -19,6 +19,11 @@ configMapGenerator:
       - config/dashboards/kubernetes_deployments.json
       - config/dashboards/kubernetes_cluster.json
       # - config/dashboards/node_exporter.json
+secretGenerator:
+  - name: grafana
+    commands:
+      GF_AUTH_GITHUB_CLIENT_ID: "echo ${GRAFANA_CLIENT_ID}"
+      GF_AUTH_GITHUB_CLIENT_SECRET: "echo ${GRAFANA_CLIENT_SECRET}"
 imageTags:
   - name: grafana/grafana
     newTag: latest
