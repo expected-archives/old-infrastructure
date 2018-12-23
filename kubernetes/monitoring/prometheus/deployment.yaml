@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: prometheus
   namespace: monitoring
@@ -7,6 +7,7 @@ metadata:
     app: prometheus
 spec:
   replicas: 1
+  serviceName: prometheus
   selector:
     matchLabels:
       app: prometheus
@@ -38,11 +39,11 @@ spec:
             - --storage.tsdb.retention=1y
           resources:
             limits:
-              cpu: 100m
-              memory: 512Mi
+              cpu: 200m
+              memory: 1024Mi
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 200m
+              memory: 1024Mi
       volumes:
         - name: config
           configMap:
