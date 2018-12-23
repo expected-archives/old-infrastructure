@@ -1,14 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginx-ingress
-  namespace: tools
-  labels:
-    app: nginx-ingress
+  name: traefik
 spec:
   type: LoadBalancer
   selector:
-    app: nginx-ingress
+    app: traefik
   ports:
     - name: http
       port: 80

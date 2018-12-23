@@ -1,0 +1,17 @@
+namespace: tools
+commonLabels:
+  app: drone
+resources:
+  - account.yaml
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml
+secretGenerator:
+  - name: drone
+    commands:
+      DRONE_GITHUB_CLIENT_ID: "echo ${DRONE_CLIENT_ID}"
+      DRONE_GITHUB_CLIENT_SECRET: "echo ${DRONE_CLIENT_SECRET}"
+      DRONE_RPC_SECRET: "openssl rand -hex 16"
+imageTags:
+  - name: drone/drone
+    newTag: 1.0.0-rc.3

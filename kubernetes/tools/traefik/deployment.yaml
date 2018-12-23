@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      terminationGracePeriodSeconds: 60
+      serviceAccountName: traefik
+      containers:
+        - name: traefik
+          image: traefik
+          args:
+            - --configfile=/etc/traefik/traefik.toml
+            - --api
+            - --kubernetes
+            - --logLevel=INFO
+          volumeMounts:
+            - name: config
+              mountPath: /etc/traefik
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+      volumes:
+        - name: config
+          configMap:
+            name: traefik
