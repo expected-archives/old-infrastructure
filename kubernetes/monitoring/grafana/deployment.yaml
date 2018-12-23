@@ -2,17 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
-  namespace: monitoring
-  labels:
-    app: grafana
 spec:
   selector:
     matchLabels:
       app: grafana
   template:
-    metadata:
-      labels:
-        app: grafana
     spec:
       securityContext:
         fsGroup: 2000

@@ -1,0 +1,24 @@
+namespace: monitoring
+commonLabels:
+  app: grafana
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml
+  - volume.yaml
+configMapGenerator:
+  - name: grafana
+    files:
+      - config/granafa.ini
+  - name: grafana-datasources
+    files:
+      - config/datasources.yaml
+  - name: grafana-dashboards
+    files:
+      - config/dashboards.yaml
+      - config/dashboards/kubernetes_deployments.json
+      - config/dashboards/kubernetes_cluster.json
+      # - config/dashboards/node_exporter.json
+imageTags:
+  - name: grafana/grafana
+    newTag: latest
