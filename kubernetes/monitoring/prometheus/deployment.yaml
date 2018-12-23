@@ -37,6 +37,18 @@ spec:
             - --web.enable-lifecycle
             - --storage.tsdb.path=/var/prometheus
             - --storage.tsdb.retention=1y
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
           resources:
             limits:
               cpu: 200m
@@ -44,6 +56,22 @@ spec:
             requests:
               cpu: 200m
               memory: 1024Mi
+        - name: configmap-reload
+          image: jimmidyson/configmap-reload
+          args:
+            - --volume-dir=/etc/prometheus
+            - --webhook-url=http://localhost:9090/-/reload
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus
+              readOnly: true
+          resources:
+            limits:
+              cpu: 10m
+              memory: 10Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
       volumes:
         - name: config
           configMap:
