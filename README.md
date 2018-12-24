@@ -21,9 +21,10 @@ total per month: $69
 
 ### development pricing
 
-- one master on 1-S ($4)
+- one master on 1-S ($3)
 - one proxy on 1-S ($4)
-- three worker on 1-S ($12)
+- three worker on 1-S ($9)
+- three volumes of 50go ($3)
 
 ### env
 
