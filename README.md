@@ -24,3 +24,10 @@ total per month: $69
 - one master on 1-S ($4)
 - one proxy on 1-S ($4)
 - three worker on 1-S ($12)
+
+### env
+
+- GRAFANA_CLIENT_ID: le client id github pour l'auth grafana
+- GRAFANA_CLIENT_SECRET: le client secret github pour l'auth grafana
+- DRONE_CLIENT_ID: le client id github pour l'auth drone
+- DRONE_CLIENT_SECRET: le client secret github pour l'auth drone

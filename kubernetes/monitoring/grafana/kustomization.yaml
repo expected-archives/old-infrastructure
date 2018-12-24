@@ -22,8 +22,8 @@ configMapGenerator:
 secretGenerator:
   - name: grafana
     commands:
-      GF_AUTH_GITHUB_CLIENT_ID: "echo ${GRAFANA_CLIENT_ID}"
-      GF_AUTH_GITHUB_CLIENT_SECRET: "echo ${GRAFANA_CLIENT_SECRET}"
+      GF_AUTH_GITHUB_CLIENT_ID: "printf ${GRAFANA_CLIENT_ID}"
+      GF_AUTH_GITHUB_CLIENT_SECRET: "printf ${GRAFANA_CLIENT_SECRET}"
 imageTags:
   - name: grafana/grafana
     newTag: latest
