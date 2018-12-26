@@ -1,0 +1,6 @@
+---
+drone_email: "{{lookup('env','EMAIL')}}"
+drone_domain: "drone.{{lookup('env','DOMAIN')}}"
+drone_version: 1.0.0-rc.3
+drone_github_client_id: "{{lookup('env','DRONE_CLIENT_ID')}}"
+drone_github_client_secret: "{{lookup('env','DRONE_CLIENT_SECRET')}}"

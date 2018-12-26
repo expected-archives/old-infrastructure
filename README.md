@@ -21,13 +21,13 @@ total per month: $69
 
 ### development pricing
 
-- one master on 1-S ($3)
-- one proxy on 1-S ($4)
-- three worker on 1-S ($9)
-- three volumes of 50go ($3)
+- one master on 1-S ($4)
+- three worker on 1-M ($24)
 
 ### env
 
+- EMAIL: email de contact
+- DOMAIN: le nom de domaine
 - GRAFANA_CLIENT_ID: le client id github pour l'auth grafana
 - GRAFANA_CLIENT_SECRET: le client secret github pour l'auth grafana
 - DRONE_CLIENT_ID: le client id github pour l'auth drone

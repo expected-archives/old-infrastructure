@@ -11,8 +11,10 @@ variable "scaleway_region" {
   default = "par1"
 }
 
-provider "scaleway" {
-  organization  = "${var.scaleway_organization}"
-  token         = "${var.scaleway_token}"
-  region        = "${var.scaleway_region}"
+variable "cloudflare_email" {
+  type = "string"
+}
+
+variable "cloudflare_token" {
+  type = "string"
 }
