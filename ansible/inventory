@@ -1,2 +1,2 @@
 [drone]
-51.15.129.236 ansible_user=root
+51.15.244.251 ansible_user=root ansible_python_interpreter=/usr/bin/python3

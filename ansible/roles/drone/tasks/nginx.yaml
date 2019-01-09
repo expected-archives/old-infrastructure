@@ -4,11 +4,11 @@
   apt:
     name: nginx-full
     state: latest
-- name: Stop nginx
+- name: Start nginx
   become: true
   service:
     name: nginx
-    state: stopped
+    state: started
 - name: Add certbot repositories
   become: true
   apt_repository:
