@@ -1,0 +1,27 @@
+---
+- name: Install vault prerequisites
+  become: true
+  apt:
+    name: unzip
+    state: latest
+- name: Download vault.zip
+  get_url:
+    url: "https://releases.hashicorp.com/vault/{{vault_version}}/vault_{{vault_version}}_linux_amd64.zip"
+    dest: /tmp/vault.zip
+- name: Unarchive vault.zip
+  become: true
+  unarchive:
+    src: /tmp/vault.zip
+    dest: /usr/local/bin
+    remote_src: yes
+- name: Install vault service
+  become: true
+  template:
+    src: templates/vault.service
+    dest: /etc/systemd/system/vault.service
+- name: Create vault configuration directory
+  become: true
+  file:
+    path: /etc/vault.d
+    state: directory
+    mode: 0755

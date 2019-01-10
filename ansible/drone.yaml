@@ -1,4 +1,4 @@
 ---
 - hosts: drone
   roles:
-    - { role: drone }
+    - { role: nomad }

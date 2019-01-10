@@ -1,0 +1,35 @@
+---
+- name: Install docker prerequisites
+  become: true
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python
+      - python-pip
+    state: latest
+- name: Add docker repository key
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+- name: Add docker repository
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+- name: Install docker
+  become: true
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+- name: Install docker python library
+  become: true
+  pip:
+    name: docker
+- name: Enable docker service
+  become: true
+  service:
+    name: docker
+    state: restarted

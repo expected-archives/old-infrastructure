@@ -1,0 +1,27 @@
+---
+- name: Install consul prerequisites
+  become: true
+  apt:
+    name: unzip
+    state: latest
+- name: Download consul.zip
+  get_url:
+    url: "https://releases.hashicorp.com/consul/{{consul_version}}/consul_{{consul_version}}_linux_amd64.zip"
+    dest: /tmp/consul.zip
+- name: Unarchive consul.zip
+  become: true
+  unarchive:
+    src: /tmp/consul.zip
+    dest: /usr/local/bin
+    remote_src: yes
+- name: Install consul service
+  become: true
+  template:
+    src: templates/consul.service
+    dest: /etc/systemd/system/consul.service
+- name: Create consul configuration directory
+  become: true
+  file:
+    path: /etc/consul.d
+    state: directory
+    mode: 0755

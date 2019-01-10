@@ -1,8 +1,17 @@
-[master]
-${master}
+[consul-master]
+${consul-master}
 
-[proxy]
-${proxy}
+[consul]
+${consul}
 
-[worker]
-${worker}
+[vault-master]
+${vault-master}
+
+[vault]
+${vault}
+
+[consul-master]
+${consul-master}
+
+[consul]
+${consul}

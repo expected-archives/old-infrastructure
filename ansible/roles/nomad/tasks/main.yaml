@@ -1,0 +1,27 @@
+---
+- name: Install nomad prerequisites
+  become: true
+  apt:
+    name: unzip
+    state: latest
+- name: Download nomad.zip
+  get_url:
+    url: "https://releases.hashicorp.com/nomad/{{nomad_version}}/nomad_{{nomad_version}}_linux_amd64.zip"
+    dest: /tmp/nomad.zip
+- name: Unarchive nomad.zip
+  become: true
+  unarchive:
+    src: /tmp/nomad.zip
+    dest: /usr/local/bin
+    remote_src: yes
+- name: Install nomad service
+  become: true
+  template:
+    src: templates/nomad.service
+    dest: /etc/systemd/system/nomad.service
+- name: Create nomad configuration directory
+  become: true
+  file:
+    path: /etc/nomad.d
+    state: directory
+    mode: 0755
