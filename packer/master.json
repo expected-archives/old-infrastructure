@@ -1,0 +1,22 @@
+{
+  "builders": [
+    {
+      "type": "scaleway",
+      "image": "b286bb82-cf3b-4cb6-b454-4a7b3b47e8ad",
+      "commercial_type": "START1-S",
+      "ssh_username": "root",
+      "ssh_private_key_file": "~/.ssh/id_rsa",
+      "snapshot_name": "master-{{timestamp}}",
+      "image_name": "master-{{timestamp}}",
+      "api_access_key": "{{env `SCALEWAY_ORGANIZATION`}}",
+      "api_token": "{{env `SCALEWAY_TOKEN`}}",
+      "region": "{{env `SCALEWAY_REGION`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "../ansible/master.yaml"
+    }
+  ]
+}

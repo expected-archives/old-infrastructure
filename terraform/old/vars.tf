@@ -18,8 +18,3 @@ variable "cloudflare_email" {
 variable "cloudflare_token" {
   type = "string"
 }
-
-variable "domain" {
-  type    = "string"
-  default = "expected.sh"
-}

@@ -32,3 +32,12 @@ total per month: $69
 - GRAFANA_CLIENT_SECRET: le client secret github pour l'auth grafana
 - DRONE_CLIENT_ID: le client id github pour l'auth drone
 - DRONE_CLIENT_SECRET: le client secret github pour l'auth drone
+
+### deploy
+
+```
+cd ./packer
+packer build master.json
+cd ../terraform
+terraform apply -var "domain=$DOMAIN" -var "master_image=$MASTER_IMAGE" 
+```
