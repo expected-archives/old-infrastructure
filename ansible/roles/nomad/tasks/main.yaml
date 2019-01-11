@@ -16,8 +16,8 @@
     remote_src: yes
 - name: Install nomad service
   become: true
-  template:
-    src: templates/nomad.service
+  copy:
+    src: files/nomad.service
     dest: /etc/systemd/system/nomad.service
 - name: Create nomad group
   become: true

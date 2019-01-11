@@ -1,9 +1,9 @@
 resource "scaleway_server" "master_server" {
   count               = 3
   name                = "master-${count.index}"
-  type                = "START1-S"
-  image               = "${var.master_image}"
-  tags                = ["consul-server", "nomad-server", "agent-server", "postgres", "kafka"]
+  type                = "START1-M"
+  image               = "b286bb82-cf3b-4cb6-b454-4a7b3b47e8ad"
+  tags                = ["consul", "nomad", "vault", "postgres", "kafka"]
   dynamic_ip_required = false
 
   lifecycle {
@@ -12,21 +12,23 @@ resource "scaleway_server" "master_server" {
 }
 
 resource "scaleway_ip" "master_ip" {
-  count  = 3
+  count  = "${scaleway_server.master_server.count}"
   server = "${element(scaleway_server.master_server.*.id, count.index)}"
 }
 
-resource "null_resource" "master_provisioning" {
-  count = 3
+resource "scaleway_server" "tools_server" {
+  name                = "tools"
+  type                = "START1-M"
+  image               = "b286bb82-cf3b-4cb6-b454-4a7b3b47e8ad"
+  tags                = ["drone", "grafana", "prometheus"]
+  security_group      = "${scaleway_security_group.tools_security_group.id}"
+  dynamic_ip_required = false
 
-  provisioner "remote-exec" {
-    inline = [
-      "echo ${}"
-    ]
-
-    connection {
-      host        = "${element(scaleway_ip.master_ip.*.ip, count.index)}"
-      private_key = "${file("~/.ssh/id_rsa")}"
-    }
+  lifecycle {
+    create_before_destroy = true
   }
+}
+
+resource "scaleway_ip" "tools_ip" {
+  server = "${scaleway_server.tools_server.id}"
 }

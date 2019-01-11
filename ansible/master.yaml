@@ -1,8 +1,0 @@
----
-- hosts: all
-  vars:
-    nomad_enable_docker: false
-  roles:
-    - { role: consul }
-    - { role: vault }
-    - { role: nomad }

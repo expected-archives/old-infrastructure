@@ -16,8 +16,8 @@
     remote_src: yes
 - name: Install consul service
   become: true
-  template:
-    src: templates/consul.service
+  copy:
+    src: files/consul.service
     dest: /etc/systemd/system/consul.service
 - name: Create consul group
   become: true

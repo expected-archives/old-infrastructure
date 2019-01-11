@@ -16,8 +16,8 @@
     remote_src: yes
 - name: Install vault service
   become: true
-  template:
-    src: templates/vault.service
+  copy:
+    src: files/vault.service
     dest: /etc/systemd/system/vault.service
 - name: Create vault group
   become: true

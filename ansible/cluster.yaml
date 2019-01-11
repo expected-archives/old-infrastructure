@@ -1,0 +1,14 @@
+---
+- hosts: all
+  roles:
+    - role: consul
+- hosts: master
+  roles:
+    - role: vault
+    - role: nomad
+      vars:
+        nomad_enable_docker: false
+- hosts: tools
+  roles:
+    - role: docker
+    - role: traefik

@@ -1,0 +1,18 @@
+[Unit]
+Description=Traefik
+Documentation=https://docs.traefik.io
+Wants=network-online.target consul.service
+After=network-online.target consul.service
+ConditionFileNotEmpty=/etc/traefik/traefik.toml
+
+[Service]
+User=traefik
+Group=traefik
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+Type=notify
+ExecStart=/usr/local/bin/traefik --configFile=/etc/traefik/traefik.toml
+Restart=always
+WatchdogSec=1s
+
+[Install]
+WantedBy=multi-user.target

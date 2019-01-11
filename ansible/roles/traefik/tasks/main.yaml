@@ -1,0 +1,36 @@
+---
+- name: Download traefik
+  get_url:
+    url: "https://github.com/containous/traefik/releases/download/v{{traefik_version}}/traefik_linux-amd64"
+    dest: /usr/local/bin/traefik
+    mode: 0755
+- name: Install traefik service
+  become: true
+  copy:
+    src: files/traefik.service
+    dest: /etc/systemd/system/traefik.service
+- name: Create traefik group
+  become: true
+  group:
+    name: traefik
+    state: present
+- name: Create traefik user
+  become: true
+  user:
+    name: traefik
+    group: traefik
+- name: Add traefik to docker group
+  become: true
+  user:
+    name: traefik
+    groups: docker
+    append: yes
+  when: traefik_enable_docker
+- name: Create traefik configuration directory
+  become: true
+  file:
+    path: /etc/traefik
+    state: directory
+    mode: 0755
+    owner: traefik
+    group: traefik

@@ -10,6 +10,7 @@
       - python
       - python-pip
     state: latest
+    update_cache: yes
 - name: Add docker repository key
   become: true
   apt_key:
