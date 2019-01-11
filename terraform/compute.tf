@@ -21,7 +21,7 @@ resource "null_resource" "master_provisioning" {
 
   provisioner "remote-exec" {
     inline = [
-      "echo hello"
+      "echo ${}"
     ]
 
     connection {

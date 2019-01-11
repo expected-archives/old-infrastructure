@@ -6,6 +6,8 @@ After=network-online.target consul.service
 ConditionFileNotEmpty=/etc/nomad.d/nomad.hcl
 
 [Service]
+User=consul
+Group=consul
 KillMode=process
 KillSignal=SIGINT
 ExecStart=/usr/bin/nomad agent -config /etc/nomad.d/

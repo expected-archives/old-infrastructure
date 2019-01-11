@@ -19,9 +19,21 @@
   template:
     src: templates/vault.service
     dest: /etc/systemd/system/vault.service
+- name: Create vault group
+  become: true
+  group:
+    name: vault
+    state: present
+- name: Create vault user
+  become: true
+  user:
+    name: vault
+    group: vault
 - name: Create vault configuration directory
   become: true
   file:
     path: /etc/vault.d
     state: directory
     mode: 0755
+    owner: vault
+    group: vault

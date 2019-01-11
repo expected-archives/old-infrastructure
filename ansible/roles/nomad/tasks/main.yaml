@@ -19,9 +19,30 @@
   template:
     src: templates/nomad.service
     dest: /etc/systemd/system/nomad.service
+- name: Create nomad group
+  become: true
+  group:
+    name: nomad
+    state: present
+- name: Create nomad user
+  become: true
+  user:
+    name: nomad
+    group: nomad
+    home: /var/lib/nomad
+    create_home: true
+- name: Add nomad to docker group
+  become: true
+  user:
+    name: nomad
+    groups: docker
+    append: yes
+  when: nomad_enable_docker
 - name: Create nomad configuration directory
   become: true
   file:
     path: /etc/nomad.d
     state: directory
     mode: 0755
+    owner: nomad
+    group: nomad

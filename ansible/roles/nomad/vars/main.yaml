@@ -1,2 +1,3 @@
 ---
 nomad_version: 0.8.6
+nomad_enable_docker: true

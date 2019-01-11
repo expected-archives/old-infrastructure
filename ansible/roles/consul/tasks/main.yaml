@@ -19,9 +19,23 @@
   template:
     src: templates/consul.service
     dest: /etc/systemd/system/consul.service
+- name: Create consul group
+  become: true
+  group:
+    name: consul
+    state: present
+- name: Create consul user
+  become: true
+  user:
+    name: consul
+    group: consul
+    home: /var/lib/consul
+    create_home: true
 - name: Create consul configuration directory
   become: true
   file:
     path: /etc/consul.d
     state: directory
     mode: 0755
+    owner: consul
+    group: consul

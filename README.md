@@ -39,5 +39,5 @@ total per month: $69
 cd ./packer
 packer build master.json
 cd ../terraform
-terraform apply -var "domain=$DOMAIN" -var "master_image=$MASTER_IMAGE" 
+terraform apply -var "domain=$DOMAIN" -var "master_image=$MASTER_IMAGE" -var "datacenter=$DATACENTER"
 ```
