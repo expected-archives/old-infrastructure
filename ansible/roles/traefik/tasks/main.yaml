@@ -1,13 +1,14 @@
 ---
 - name: Download traefik
+  become: true
   get_url:
     url: "https://github.com/containous/traefik/releases/download/v{{traefik_version}}/traefik_linux-amd64"
-    dest: /usr/local/bin/traefik
+    dest: "{{traefik_bindir}}/traefik"
     mode: 0755
 - name: Install traefik service
   become: true
-  copy:
-    src: files/traefik.service
+  template:
+    src: templates/traefik.service.j2
     dest: /etc/systemd/system/traefik.service
 - name: Create traefik group
   become: true
@@ -34,3 +35,15 @@
     mode: 0755
     owner: traefik
     group: traefik
+- name: Generate configuration
+  become: true
+  template:
+    src: templates/traefik.toml.j2
+    dest: /etc/traefik/traefik.toml
+    owner: traefik
+    group: traefik
+- name: Start service
+  become: true
+  service:
+    name: traefik
+    state: restarted

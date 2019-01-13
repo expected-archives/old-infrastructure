@@ -7,10 +7,10 @@
   "bootstrap_expect": {{ groups['master'] | map('extract', hostvars, ['private_ip']) | list | length | to_json }},
   "retry_join": {{ groups['master'] | map('extract', hostvars, ['private_ip']) | list | to_json }},
   "rejoin_after_leave": true,
-  {% if consul_encryption %}
+{% if consul_encryption %}
   "encrypt": {{ consul_encryption | to_json }},
   "verify_outgoing": true,
   "verify_incoming": true,
-  {% endif %}
+{% endif %}
   "bind_addr": {{ hostvars[inventory_hostname].private_ip | to_json }}
 }

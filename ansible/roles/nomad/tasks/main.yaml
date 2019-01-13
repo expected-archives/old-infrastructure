@@ -12,12 +12,12 @@
   become: true
   unarchive:
     src: /tmp/nomad.zip
-    dest: /usr/local/bin
+    dest: "{{ nomad_bin }}"
     remote_src: yes
 - name: Install nomad service
   become: true
-  copy:
-    src: files/nomad.service
+  template:
+    src: templates/nomad.service.j2
     dest: /etc/systemd/system/nomad.service
 - name: Create nomad group
   become: true
@@ -46,3 +46,24 @@
     mode: 0755
     owner: nomad
     group: nomad
+- name: Generate server configuration
+  become: true
+  template:
+    src: templates/server.json.j2
+    dest: /etc/nomad.d/nomad.json
+    owner: nomad
+    group: nomad
+  when: nomad_server
+- name: Generate client configuration
+  become: true
+  template:
+    src: templates/client.json.j2
+    dest: /etc/nomad.d/nomad.json
+    owner: nomad
+    group: nomad
+  when: not nomad_server
+- name: Start service
+  become: true
+  service:
+    name: nomad
+    state: restarted

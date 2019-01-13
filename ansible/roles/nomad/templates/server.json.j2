@@ -1,0 +1,19 @@
+{
+  "datacenter": {{ nomad_datacenter | to_json }},
+  "region": {{ nomad_region | to_json }},
+  "data_dir": "/var/lib/nomad",
+  "log_level": "INFO",
+  "server": {
+    "enabled": true,
+    "bootstrap_expect": {{ groups['master'] | map('extract', hostvars, ['private_ip']) | list | length | to_json }}
+  },
+  "consul": {
+    "address": "127.0.0.1:8500",
+    "server_service_name": "nomad",
+    "client_service_name": "nomad-client",
+    "auto_advertise": true,
+    "server_auto_join": true,
+    "client_auto_join": true
+  },
+  "bind_addr": {{ hostvars[inventory_hostname].private_ip | to_json }}
+}

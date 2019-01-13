@@ -1,16 +1,16 @@
 [Unit]
 Description="HashiCorp Nomad - A flexible cluster scheduler"
 Documentation=https://nomadproject.io/docs/
-Wants=network-online.target consul.service
-After=network-online.target consul.service
-ConditionFileNotEmpty=/etc/nomad.d/nomad.hcl
+Wants=network-online.target
+After=network-online.target
+ConditionFileNotEmpty=/etc/nomad.d/nomad.json
 
 [Service]
-User=consul
-Group=consul
+User=nomad
+Group=nomad
 KillMode=process
 KillSignal=SIGINT
-ExecStart=/usr/bin/nomad agent -config /etc/nomad.d/
+ExecStart={{ nomad_bin }}/nomad agent -config /etc/nomad.d/
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 RestartSec=2
