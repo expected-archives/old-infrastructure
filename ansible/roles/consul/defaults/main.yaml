@@ -1,0 +1,5 @@
+---
+consul_version: 1.4.0
+consul_datacenter: paris
+consul_enable_ui: false
+consul_server: false

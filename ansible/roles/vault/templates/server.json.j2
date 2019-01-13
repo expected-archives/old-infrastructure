@@ -1,0 +1,17 @@
+{
+  "ui": true,
+  "api_addr": "http://{{ hostvars[inventory_hostname].private_ip }}:8200",
+  "storage": {
+    "consul": {
+      "address": "127.0.0.1:8500",
+      "path": "vault/",
+      "service_tags": "traefik.enable=true,traefik.frontend.rule=Host:vault.{{ domain }}"
+    }
+  },
+  "listener": {
+    "tcp": {
+      "address": "{{ hostvars[inventory_hostname].private_ip }}:8200",
+      "tls_disable": true
+    }
+  }
+}

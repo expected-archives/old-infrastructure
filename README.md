@@ -39,4 +39,5 @@ total per month: $69
 cd ./terraform
 terraform apply -var "domain=$DOMAIN"
 cd ../ansible
+ansible-playbook -i inventory cluster.yaml
 ```

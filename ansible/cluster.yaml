@@ -1,14 +1,15 @@
 ---
-- hosts: all
+- hosts: master
+  vars:
+    domain: "{{ lookup('env', 'DOMAIN') }}"
   roles:
     - role: consul
-- hosts: master
-  roles:
+      consul_server: true
     - role: vault
     - role: nomad
-      vars:
-        nomad_enable_docker: false
+      nomad_enable_docker: false
 - hosts: tools
   roles:
+    - role: consul
     - role: docker
     - role: traefik

@@ -1,37 +1,37 @@
 ---
-- name: Install consul prerequisites
+- name: Install prerequisites
   become: true
   apt:
     name: unzip
     state: latest
-- name: Download consul.zip
+- name: Download
   get_url:
     url: "https://releases.hashicorp.com/consul/{{consul_version}}/consul_{{consul_version}}_linux_amd64.zip"
     dest: /tmp/consul.zip
-- name: Unarchive consul.zip
+- name: Unarchive
   become: true
   unarchive:
     src: /tmp/consul.zip
     dest: /usr/local/bin
     remote_src: yes
-- name: Install consul service
+- name: Install service
   become: true
   copy:
     src: files/consul.service
     dest: /etc/systemd/system/consul.service
-- name: Create consul group
+- name: Create group
   become: true
   group:
     name: consul
     state: present
-- name: Create consul user
+- name: Create user
   become: true
   user:
     name: consul
     group: consul
     home: /var/lib/consul
     create_home: true
-- name: Create consul configuration directory
+- name: Create configuration directory
   become: true
   file:
     path: /etc/consul.d
@@ -39,3 +39,24 @@
     mode: 0755
     owner: consul
     group: consul
+- name: Generate server configuration
+  become: true
+  template:
+    src: templates/server.json.j2
+    dest: /etc/consul.d/consul.json
+    owner: consul
+    group: consul
+  when: consul_server
+- name: Generate client configuration
+  become: true
+  template:
+    src: templates/client.json.j2
+    dest: /etc/consul.d/consul.json
+    owner: consul
+    group: consul
+  when: not consul_server
+- name: Start service
+  become: true
+  service:
+    name: consul
+    state: restarted
