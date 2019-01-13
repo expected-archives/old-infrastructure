@@ -19,13 +19,6 @@ resource "cloudflare_record" "tools_consul_record" {
   value = "${scaleway_ip.tools_ip.ip}"
 }
 
-resource "cloudflare_record" "tools_vault_record" {
-  domain = "${var.domain}"
-  name = "vault"
-  type = "A"
-  value = "${scaleway_ip.tools_ip.ip}"
-}
-
 resource "cloudflare_record" "tools_nomad_record" {
   domain = "${var.domain}"
   name = "nomad"

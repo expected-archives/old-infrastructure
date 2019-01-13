@@ -2,14 +2,16 @@
 - hosts: master
   vars:
     domain: "{{ lookup('env', 'DOMAIN') }}"
+    email: "{{ lookup('env', 'EMAIL') }}"
+    consul_encryption: "{{ lookup('env', 'CONSUL_ENCRYPTION') }}"
   roles:
     - role: consul
       consul_server: true
-    - role: vault
     - role: nomad
       nomad_enable_docker: false
 - hosts: tools
   roles:
     - role: consul
+      consul_enable_ui: true
     - role: docker
     - role: traefik

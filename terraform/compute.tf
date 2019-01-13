@@ -3,7 +3,7 @@ resource "scaleway_server" "master_server" {
   name                = "master-${count.index}"
   type                = "START1-M"
   image               = "b286bb82-cf3b-4cb6-b454-4a7b3b47e8ad"
-  tags                = ["consul", "nomad", "vault", "postgres", "kafka"]
+  tags                = ["consul", "nomad", "postgres", "kafka"]
   dynamic_ip_required = false
 
   lifecycle {

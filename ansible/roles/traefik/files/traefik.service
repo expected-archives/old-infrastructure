@@ -1,8 +1,8 @@
 [Unit]
 Description=Traefik
 Documentation=https://docs.traefik.io
-Wants=network-online.target consul.service
-After=network-online.target consul.service
+Wants=network-online.target
+After=network-online.target
 ConditionFileNotEmpty=/etc/traefik/traefik.toml
 
 [Service]

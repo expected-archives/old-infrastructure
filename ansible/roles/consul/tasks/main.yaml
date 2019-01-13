@@ -12,12 +12,12 @@
   become: true
   unarchive:
     src: /tmp/consul.zip
-    dest: /usr/local/bin
+    dest: "{{ consul_bin }}"
     remote_src: yes
 - name: Install service
   become: true
-  copy:
-    src: files/consul.service
+  template:
+    src: templates/consul.service.j2
     dest: /etc/systemd/system/consul.service
 - name: Create group
   become: true
