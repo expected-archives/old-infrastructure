@@ -41,3 +41,11 @@ defaultEntryPoints = ["http", "https"]
   domain = "{{ domain }}"
   prefix = "traefik"
   frontEndRule = "Host:{{ '{{' }}.ServiceName{{ '}}' }}.{{ '{{' }}.Domain{{ '}}' }}"
+
+################################################################
+# File configuration backend
+################################################################
+
+[file]
+  directory = "/etc/traefik/rules"
+  watch = true

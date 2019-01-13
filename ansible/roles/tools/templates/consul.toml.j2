@@ -1,0 +1,15 @@
+[backends]
+  [backends.consul]
+    [backends.consul.servers]
+      [backends.consul.servers.server0]
+        url = "http://127.0.0.1:8500"
+        weight = 1
+
+[frontends]
+  [frontends.consul]
+    entryPoints = ["http", "https"]
+    backend = "consul"
+    passHostHeader = true
+    [frontends.consul.routes]
+      [frontends.consul.routes.route0]
+        rule = "Host:consul.{{ domain }}"

@@ -6,5 +6,10 @@
   "ui": {{ consul_enable_ui | to_json }},
   "retry_join": {{ groups['master'] | map('extract', hostvars, ['private_ip']) | list | to_json }},
   "rejoin_after_leave": true,
+{% if consul_encryption %}
+  "encrypt": {{ consul_encryption | to_json }},
+  "encrypt_verify_incoming": true,
+  "encrypt_verify_outgoing": true,
+{% endif %}
   "bind_addr": {{ hostvars[inventory_hostname].private_ip | to_json }}
 }

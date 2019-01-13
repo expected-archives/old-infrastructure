@@ -1,10 +1,11 @@
 ---
 - hosts: master
   vars:
-    # consul_encryption: "{{ lookup('env', 'CONSUL_ENCRYPTION') }}"
+    encryption_key: "{{ lookup('env', 'ENCRYPTION_KEY') }}"
   roles:
     - role: consul
       consul_server: true
+      consul_encryption: "{{encryption_key}}"
     - role: nomad
       nomad_enable_docker: false
       nomad_server: true
@@ -12,10 +13,12 @@
   vars:
     domain: "{{ lookup('env', 'DOMAIN') }}"
     email: "{{ lookup('env', 'EMAIL') }}"
-    # consul_encryption: "{{ lookup('env', 'CONSUL_ENCRYPTION') }}"
+    encryption_key: "{{ lookup('env', 'ENCRYPTION_KEY') }}"
   roles:
     - role: consul
+      consul_encryption: "{{encryption_key}}"
       consul_enable_ui: true
     - role: docker
     - role: nomad
     - role: traefik
+    - role: tools

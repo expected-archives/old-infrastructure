@@ -1,0 +1,11 @@
+---
+- name: Generate traefik rules
+  become: true
+  template:
+    src: "templates/{{item}}.toml.j2"
+    dest: "/etc/traefik/rules/{{item}}.toml"
+    owner: traefik
+    group: traefik
+  with_items:
+    - consul
+    - nomad

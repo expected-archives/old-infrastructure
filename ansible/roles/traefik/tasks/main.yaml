@@ -30,11 +30,14 @@
 - name: Create traefik configuration directory
   become: true
   file:
-    path: /etc/traefik
+    path: "{{item}}"
     state: directory
     mode: 0755
     owner: traefik
     group: traefik
+  with_items:
+    - /etc/traefik
+    - /etc/traefik/rules
 - name: Generate configuration
   become: true
   template:
