@@ -17,7 +17,7 @@ defaultEntryPoints = ["http", "https"]
 
 [acme]
   email = "{{ email }}"
-  storage = "/etc/traefik/acme.json"
+  storage = "traefik/acme/account"
   entryPoint = "https"
   onHostRule = true
   [acme.httpChallenge]
@@ -29,6 +29,15 @@ defaultEntryPoints = ["http", "https"]
 
 [api]
   dashboard = true
+
+################################################################
+# Consul KV Provider
+################################################################
+
+[consul]
+  endpoint = "127.0.0.1:8500"
+  watch = true
+  prefix = "traefik"
 
 ################################################################
 # Consul configuration backend

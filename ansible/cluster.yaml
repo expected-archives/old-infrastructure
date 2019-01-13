@@ -9,6 +9,7 @@
     - role: nomad
       nomad_enable_docker: false
       nomad_server: true
+      nomad_encryption: "{{encryption_key}}"
 - hosts: tools
   vars:
     domain: "{{ lookup('env', 'DOMAIN') }}"
@@ -20,5 +21,6 @@
       consul_enable_ui: true
     - role: docker
     - role: nomad
+      nomad_encryption: "{{encryption_key}}"
     - role: traefik
     - role: tools

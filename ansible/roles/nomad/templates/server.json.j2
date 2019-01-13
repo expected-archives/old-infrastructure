@@ -5,6 +5,9 @@
   "log_level": "INFO",
   "server": {
     "enabled": true,
+  {% if nomad_encryption %}
+    "encrypt": {{ nomad_encryption | to_json }},
+  {% endif %}
     "bootstrap_expect": {{ groups['master'] | map('extract', hostvars, ['private_ip']) | list | length | to_json }}
   },
   "consul": {
