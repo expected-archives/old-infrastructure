@@ -20,7 +20,21 @@
       consul_encryption: "{{encryption_key}}"
       consul_enable_ui: true
     - role: docker
+    - role: traefik
+      traefik_enable_ui: true
+    - role: tools
+      drone_github_client_id: "{{lookup('env','DRONE_CLIENT_ID')}}"
+      drone_github_client_secret: "{{lookup('env','DRONE_CLIENT_SECRET')}}"
+      drone_email: "{{lookup('env','EMAIL')}}"
+- hosts: worker
+  vars:
+    domain: "{{ lookup('env', 'DOMAIN') }}"
+    email: "{{ lookup('env', 'EMAIL') }}"
+    encryption_key: "{{ lookup('env', 'ENCRYPTION_KEY') }}"
+  roles:
+    - role: consul
+      consul_encryption: "{{encryption_key}}"
+    - role: docker
     - role: nomad
       nomad_encryption: "{{encryption_key}}"
     - role: traefik
-    - role: tools

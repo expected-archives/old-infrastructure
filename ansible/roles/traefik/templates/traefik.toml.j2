@@ -28,7 +28,7 @@ defaultEntryPoints = ["http", "https"]
 ################################################################
 
 [api]
-  dashboard = true
+  dashboard = {{ traefik_enable_ui | to_json }}
 
 ################################################################
 # Consul KV Provider

@@ -3,6 +3,7 @@ data "template_file" "inventory" {
 
   vars {
     connection_master = "${join("\n", formatlist("%s ansible_user=root private_ip=%s", scaleway_ip.master_ip.*.ip, scaleway_server.master_server.*.private_ip))}"
+    connection_worker = "${join("\n", formatlist("%s ansible_user=root private_ip=%s", scaleway_ip.worker_ip.*.ip, scaleway_server.worker_server.*.private_ip))}"
     connection_tools = "${join("\n", formatlist("%s ansible_user=root private_ip=%s", scaleway_ip.tools_ip.*.ip, scaleway_server.tools_server.*.private_ip))}"
   }
 }
