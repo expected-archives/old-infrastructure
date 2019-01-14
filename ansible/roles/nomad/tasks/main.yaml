@@ -12,12 +12,12 @@
   become: true
   unarchive:
     src: /tmp/nomad.zip
-    dest: "{{ nomad_bin }}"
+    dest: /usr/local/bin
     remote_src: yes
 - name: Install nomad service
   become: true
-  template:
-    src: templates/nomad.service.j2
+  copy:
+    src: files/nomad.service
     dest: /etc/systemd/system/nomad.service
 - name: Create nomad group
   become: true

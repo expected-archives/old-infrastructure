@@ -8,8 +8,8 @@ ConditionFileNotEmpty=/etc/consul.d/consul.json
 [Service]
 User=consul
 Group=consul
-ExecStart={{ consul_bin }}/consul agent -config-dir=/etc/consul.d/
-ExecReload={{ consul_bin }}/consul reload
+ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
+ExecReload=/usr/local/bin/consul reload
 KillMode=process
 Restart=on-failure
 LimitNOFILE=65536

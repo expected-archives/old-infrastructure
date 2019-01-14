@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "node_exporter",
+    "tags": [
+      "prometheus.scrape=true"
+    ],
+    "port": 9100
+  }
+}

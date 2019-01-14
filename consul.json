@@ -12,13 +12,13 @@
   "encrypt": "OPxeMf1XVv/GLILfAtJTvw==",
   "encrypt_verify_incoming": true,
   "encrypt_verify_outgoing": true,
-  "bind_addr": "10.17.133.143",
+  "bind_addr": "10.17.116.149",
   "acl" : {
     "enabled" : true,
     "default_policy" : "deny",
     "down_policy" : "extend-cache",
     "tokens" : {
-      "agent" : "da666809-98ca-0e94-a99c-893c4bf5f9eb"
+      "agent_master" : "da666809-98ca-0e94-a99c-893c4bf5f9eb"
     }
   }
 }

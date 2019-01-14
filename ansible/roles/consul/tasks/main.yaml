@@ -12,12 +12,12 @@
   become: true
   unarchive:
     src: /tmp/consul.zip
-    dest: "{{ consul_bin }}"
+    dest: /usr/local/bin
     remote_src: yes
 - name: Install service
   become: true
-  template:
-    src: templates/consul.service.j2
+  copy:
+    src: files/consul.service
     dest: /etc/systemd/system/consul.service
 - name: Create group
   become: true
@@ -39,3 +39,8 @@
     mode: 0755
     owner: consul
     group: consul
+- name: Install node exporter consul configuration
+  become: true
+  copy:
+    src: files/node_exporter.json
+    dest: /etc/consul.d/node_exporter.json

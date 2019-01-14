@@ -1,3 +1,0 @@
-provider "scaleway" {}
-
-provider "cloudflare" {}

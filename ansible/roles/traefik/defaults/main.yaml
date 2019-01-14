@@ -1,3 +1,2 @@
 ---
 traefik_version: 1.7.7
-traefik_bindir: /usr/local/bin
