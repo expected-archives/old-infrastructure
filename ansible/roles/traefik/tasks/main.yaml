@@ -26,7 +26,6 @@
     name: traefik
     groups: docker
     append: yes
-  when: traefik_enable_docker
 - name: Create traefik configuration directory
   become: true
   file:
@@ -38,15 +37,3 @@
   with_items:
     - /etc/traefik
     - /etc/traefik/rules
-- name: Generate configuration
-  become: true
-  template:
-    src: templates/traefik.toml.j2
-    dest: /etc/traefik/traefik.toml
-    owner: traefik
-    group: traefik
-- name: Start service
-  become: true
-  service:
-    name: traefik
-    state: restarted

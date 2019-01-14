@@ -1,8 +1,3 @@
 ---
 nomad_version: 0.8.7
-nomad_enable_docker: true
-nomad_region: global
-nomad_datacenter: paris
-nomad_server: false
 nomad_bin: /usr/local/bin
-nomad_encryption: ""

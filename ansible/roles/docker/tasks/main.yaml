@@ -29,8 +29,9 @@
   become: true
   pip:
     name: docker
-- name: Enable docker service
+- name: Disable docker service
   become: true
   service:
     name: docker
-    state: restarted
+    enabled: no
+    state: stopped

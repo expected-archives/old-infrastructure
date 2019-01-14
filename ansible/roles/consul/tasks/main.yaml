@@ -39,24 +39,3 @@
     mode: 0755
     owner: consul
     group: consul
-- name: Generate server configuration
-  become: true
-  template:
-    src: templates/server.json.j2
-    dest: /etc/consul.d/consul.json
-    owner: consul
-    group: consul
-  when: consul_server
-- name: Generate client configuration
-  become: true
-  template:
-    src: templates/client.json.j2
-    dest: /etc/consul.d/consul.json
-    owner: consul
-    group: consul
-  when: not consul_server
-- name: Start service
-  become: true
-  service:
-    name: consul
-    state: restarted

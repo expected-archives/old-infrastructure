@@ -37,7 +37,6 @@
     name: nomad
     groups: docker
     append: yes
-  when: nomad_enable_docker
 - name: Create nomad configuration directory
   become: true
   file:
@@ -46,24 +45,3 @@
     mode: 0755
     owner: nomad
     group: nomad
-- name: Generate server configuration
-  become: true
-  template:
-    src: templates/server.json.j2
-    dest: /etc/nomad.d/nomad.json
-    owner: nomad
-    group: nomad
-  when: nomad_server
-- name: Generate client configuration
-  become: true
-  template:
-    src: templates/client.json.j2
-    dest: /etc/nomad.d/nomad.json
-    owner: nomad
-    group: nomad
-  when: not nomad_server
-- name: Start service
-  become: true
-  service:
-    name: nomad
-    state: restarted
