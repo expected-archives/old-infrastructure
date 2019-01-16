@@ -4,6 +4,7 @@ module "master" {
 
 module "worker" {
   source = "./modules/worker"
+  domain = "${var.domain}"
 }
 
 //module "consul" {
