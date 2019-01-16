@@ -1,8 +1,3 @@
-variable "image" {
-  type    = "string"
-  default = "main"
-}
-
 variable "domain" {
   type    = "string"
   default = "expected.sh"

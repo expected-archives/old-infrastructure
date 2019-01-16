@@ -2,7 +2,10 @@
 - name: Install prerequisites
   become: true
   apt:
-    name: unzip
+    name:
+      - unzip
+      - jq
+      - curl
     state: latest
 - name: Download
   get_url:
@@ -42,5 +45,5 @@
 - name: Install node exporter consul configuration
   become: true
   copy:
-    src: files/node_exporter.json
-    dest: /etc/consul.d/node_exporter.json
+    src: files/node-exporter.json
+    dest: /etc/consul.d/node-exporter.json

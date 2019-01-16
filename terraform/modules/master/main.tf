@@ -1,20 +1,6 @@
 data "scaleway_image" "master_image" {
   architecture  = "x86_64"
-  name          = "${var.image}"
-}
-
-data "template_file" "cloud_init" {
-  template = "${file("${path.module}/templates/cloud-init.tpl")}"
-
-  vars {
-    datacenter                      = "${var.datacenter}"
-    bootstrap_expect                = 3
-    scaleway_discovery_organization = "${var.scaleway_discovery_organization}"
-    scaleway_discovery_token        = "${var.scaleway_discovery_token}"
-    scaleway_discovery_region       = "${var.scaleway_discovery_region}"
-    encryption_key                  = "${var.encryption_key}"
-    agent_token                     = "${var.agent_token}"
-  }
+  name          = "master"
 }
 
 resource "scaleway_server" "master_server" {
@@ -24,7 +10,6 @@ resource "scaleway_server" "master_server" {
   image               = "${data.scaleway_image.master_image.id}"
   tags                = ["consul-server", "nomad-server", "postgres", "kafka"]
   dynamic_ip_required = false
-  cloudinit           = "${data.template_file.cloud_init.rendered}"
 
   lifecycle {
     create_before_destroy = true

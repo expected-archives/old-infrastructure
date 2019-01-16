@@ -11,8 +11,8 @@
       "commercial_type": "START1-S",
       "ssh_username": "root",
       "ssh_private_key_file": "~/.ssh/id_rsa",
-      "snapshot_name": "main",
-      "image_name": "main",
+      "snapshot_name": "worker",
+      "image_name": "worker",
       "api_access_key": "{{user `api_access_key`}}",
       "api_token": "{{user `api_token`}}",
       "region": "{{user `region`}}"
@@ -21,7 +21,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "../ansible/setup.yaml"
+      "playbook_file": "../ansible/worker.yaml"
     }
   ]
 }

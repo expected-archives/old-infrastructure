@@ -2,7 +2,10 @@
 - name: Install nomad prerequisites
   become: true
   apt:
-    name: unzip
+    name:
+      - unzip
+      - jq
+      - curl
     state: latest
 - name: Download nomad.zip
   get_url:
@@ -37,6 +40,7 @@
     name: nomad
     groups: docker
     append: yes
+  ignore_errors: yes
 - name: Create nomad configuration directory
   become: true
   file:

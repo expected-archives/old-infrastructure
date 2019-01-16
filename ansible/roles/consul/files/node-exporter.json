@@ -1,6 +1,6 @@
 {
   "service": {
-    "name": "node_exporter",
+    "name": "node-exporter",
     "tags": [
       "prometheus.scrape=true"
     ],

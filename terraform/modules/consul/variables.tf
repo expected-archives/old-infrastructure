@@ -1,7 +1,3 @@
-variable "image" {
-  type = "string"
-}
-
 variable "encryption_key" {
   type = "string"
 }
