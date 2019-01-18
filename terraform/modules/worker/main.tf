@@ -8,7 +8,7 @@ resource "scaleway_server" "worker_server" {
   name                = "worker-${count.index}"
   type                = "START1-S"
   image               = "${data.scaleway_image.worker_image.id}"
-  tags                = ["consul-client", "nomad-client", "traefik"]
+  tags                = ["consul-client", "nomad-client", "docker", "traefik"]
   dynamic_ip_required = false
 
   lifecycle {

@@ -1,12 +1,12 @@
+variable "datacenter" {
+  type = "string"
+}
+
 variable "encryption_key" {
   type = "string"
 }
 
 variable "agent_token" {
-  type = "string"
-}
-
-variable "datacenter" {
   type = "string"
 }
 

@@ -12,11 +12,6 @@
     "encrypt": "${encryption_key}",
     "encrypt_verify_incoming": true,
     "encrypt_verify_outgoing": true,
-    "acl" : {
-        "enabled" : true,
-        "default_policy" : "deny",
-        "down_policy" : "extend-cache"
-    },
     "client_addr": "127.0.0.1",
     "bind_addr": "${private_ip}"
 }

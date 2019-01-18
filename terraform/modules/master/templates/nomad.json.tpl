@@ -15,5 +15,6 @@
         "auto_advertise": true,
         "server_auto_join": true,
         "client_auto_join": true
-    }
+    },
+    "bind_addr": "${private_ip}"
 }
