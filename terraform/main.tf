@@ -10,6 +10,7 @@ module "master" {
 
 module "worker" {
   source                          = "./modules/worker"
+  email                           = "${var.email}"
   domain                          = "${var.domain}"
   datacenter                      = "${var.datacenter}"
   encryption_key                  = "${var.encryption_key}"

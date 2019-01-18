@@ -16,7 +16,7 @@ defaultEntryPoints = ["http", "https"]
     [entryPoints.https.tls]
 
 [acme]
-  email = "{{ email }}"
+  email = "${email}"
   storage = "traefik/acme/account"
   entryPoint = "https"
   onHostRule = true
@@ -28,7 +28,7 @@ defaultEntryPoints = ["http", "https"]
 ################################################################
 
 [api]
-  dashboard = {{ traefik_enable_ui | to_json }}
+  dashboard = true
 
 ################################################################
 # Consul KV Provider
@@ -47,9 +47,9 @@ defaultEntryPoints = ["http", "https"]
   endpoint = "127.0.0.1:8500"
   exposedByDefault = false
   stale = false
-  domain = "{{ domain }}"
+  domain = "${domain}"
   prefix = "traefik"
-  frontEndRule = "Host:{{ '{{' }}.ServiceName{{ '}}' }}.{{ '{{' }}.Domain{{ '}}' }}"
+  frontEndRule = "Host:{{.ServiceName}}.{{.Domain}}"
 
 ################################################################
 # File configuration backend
