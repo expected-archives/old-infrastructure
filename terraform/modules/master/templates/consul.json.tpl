@@ -3,7 +3,7 @@
     "data_dir": "/var/lib/consul",
     "log_level": "INFO",
     "server": true,
-    "ui": false,
+    "ui": true,
     "bootstrap_expect": ${bootstrap_expect},
     "retry_join": [
         "provider=scaleway organization=${scaleway_discovery_organization} tag_name=consul-server token=${scaleway_discovery_token} region=${scaleway_discovery_region}"

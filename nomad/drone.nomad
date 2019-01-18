@@ -32,19 +32,33 @@ job "drone" {
       size = 300
     }
 
-    task "redis" {
+    task "drone" {
       driver = "docker"
 
       config {
-        image = "redis:3.2"
+        image = "drone/drone:1.0.0-rc.3"
 
         port_map {
-          db = 6379
+          http = 80
         }
       }
 
+      env {
+        DRONE_GITHUB_SERVER = "https://github.com"
+        DRONE_GITHUB_CLIENT_ID = ""
+        DRONE_GITHUB_CLIENT_SECRET = ""
+        DRONE_RUNNER_CAPACITY = "2"
+        DRONE_SERVER_HOST = "drone.expected.sh"
+        DRONE_SERVER_PROTO = "http"
+        DRONE_REPOSITORY_FILTER = "expectedsh"
+        DRONE_USER_FILTER = "expectedsh"
+        DRONE_ADMIN = "remicaumette"
+        //DRONE_DATABASE_DRIVER: postgres
+        //DRONE_DATABASE_DATASOURCE: postgres://drone:drone@postgres/drone?sslmode=disable
+      }
+
       resources {
-        cpu    = 100
+        cpu    = 50
         memory = 128
 
         network {

@@ -52,3 +52,10 @@ terraform destroy \
   -var "grafana_client_secret=$GRAFANA_CLIENT_ID"                           \
   -var "grafana_client_secret=$GRAFANA_CLIENT_SECRET"
 ```
+
+### forward services
+
+```
+ssh -L 4646:private-ip:4646 root@master
+
+```
