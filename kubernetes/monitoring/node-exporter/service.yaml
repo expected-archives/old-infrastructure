@@ -10,5 +10,5 @@ spec:
     app: node-exporter
   ports:
     - name: metrics
-      port: 8080
+      port: 9100
       targetPort: metrics

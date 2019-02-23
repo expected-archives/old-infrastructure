@@ -8,8 +8,8 @@ spec:
       app: node-exporter
   template:
     spec:
-      hostNetwork: true
       hostPID: true
+      hostNetwork: true
       containers:
         - name: node-exporter
           image: prom/node-exporter

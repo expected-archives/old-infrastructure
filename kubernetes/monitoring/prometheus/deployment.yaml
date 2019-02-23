@@ -51,22 +51,6 @@ spec:
             requests:
               cpu: 200m
               memory: 1024Mi
-        - name: configmap-reload
-          image: jimmidyson/configmap-reload
-          args:
-            - --volume-dir=/etc/prometheus
-            - --webhook-url=http://localhost:9090/-/reload
-          volumeMounts:
-            - name: config
-              mountPath: /etc/prometheus
-              readOnly: true
-          resources:
-            limits:
-              cpu: 10m
-              memory: 10Mi
-            requests:
-              cpu: 10m
-              memory: 10Mi
       volumes:
         - name: config
           configMap:

@@ -3,7 +3,7 @@ logLevel = "INFO"
 defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
-  [entryPoints.metrics]
+  [entryPoints.traefik]
     address = ":8080"
   [entryPoints.http]
     address = ":80"
@@ -18,12 +18,17 @@ defaultEntryPoints = ["http", "https"]
   storage = "acme.json"
   entryPoint = "https"
   onHostRule = true
+  [acme.tlsChallenge]
   [acme.httpChallenge]
     entryPoint = "http"
 
+[api]
+  entryPoint = "traefik"
+  dashboard = true
+
 [metrics]
   [metrics.prometheus]
-    entryPoint = "metrics"
+    entryPoint = "traefik"
     buckets = [0.1, 0.3, 1.2, 5.0]
 
 [kubernetes]
