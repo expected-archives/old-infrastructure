@@ -1,9 +1,8 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: traefik
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: traefik
@@ -15,14 +14,12 @@ spec:
     spec:
       terminationGracePeriodSeconds: 60
       serviceAccountName: traefik
+      hostNetwork: true
       containers:
         - name: traefik
           image: traefik
           args:
             - --configfile=/etc/traefik/traefik.toml
-            - --api
-            - --kubernetes
-            - --logLevel=INFO
           volumeMounts:
             - name: config
               mountPath: /etc/traefik

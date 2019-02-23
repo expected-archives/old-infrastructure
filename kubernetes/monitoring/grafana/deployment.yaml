@@ -26,8 +26,6 @@ spec:
               mountPath: /etc/grafana
             - name: datasources
               mountPath: /etc/grafana/provisioning/datasources
-            - name: dashboards
-              mountPath: /etc/grafana/provisioning/dashboards
             - name: grafana
               mountPath: /var/lib/grafana
           readinessProbe:
@@ -56,9 +54,6 @@ spec:
         - name: datasources
           configMap:
             name: grafana-datasources
-        - name: dashboards
-          configMap:
-            name: grafana-dashboards
         - name: grafana
           persistentVolumeClaim:
             claimName: grafana

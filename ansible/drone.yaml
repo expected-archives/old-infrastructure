@@ -1,4 +1,0 @@
----
-- hosts: drone
-  roles:
-    - { role: drone }

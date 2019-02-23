@@ -13,12 +13,6 @@ configMapGenerator:
   - name: grafana-datasources
     files:
       - config/datasources.yaml
-  - name: grafana-dashboards
-    files:
-      - config/dashboards.yaml
-      - config/dashboards/kubernetes_deployments.json
-      - config/dashboards/kubernetes_cluster.json
-      # - config/dashboards/node_exporter.json
 secretGenerator:
   - name: grafana
     commands:
