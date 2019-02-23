@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: drone
+spec:
+  rules:
+    - host: drone.expected.sh
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: drone
+              servicePort: 80

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone
+spec:
+  selector:
+    matchLabels:
+      app: drone
+  template:
+    metadata:
+      labels:
+        app: drone
+    spec:
+      containers:
+        - name: drone
+          image: drone/drone
+          ports:
+            - name: http
+              containerPort: 80
+          envFrom:
+            - secretRef:
+                name: drone
+          env:
+            - name: DRONE_KUBERNETES_ENABLED
+              value: "true"
+            - name: DRONE_KUBERNETES_NAMESPACE
+              value: tools
+            - name: DRONE_GITHUB_SERVER
+              value: https://github.com
+            - name: DRONE_SERVER_HOST
+              value: drone.expected.sh
+            - name: DRONE_SERVER_PROTO
+              value: https
+            - name: DRONE_TLS_AUTOCERT
+              value: "false"
+            - name: DRONE_REPOSITORY_FILTER
+              value: expectedsh
+            - name: DRONE_USER_FILTER
+              value: expectedsh
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
