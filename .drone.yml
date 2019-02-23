@@ -1,0 +1,22 @@
+kind: pipeline
+name: default
+steps:
+  - name: deploy
+    image: alpine
+    commands:
+      - apk --no-cache add curl gettext
+      - curl https://storage.googleapis.com/kubernetes-release/release/v1.13.3/bin/linux/amd64/kubectl -o /usr/bin/kubectl
+      - chmod +x /usr/bin/kubectl
+      - curl https://github.com/kubernetes-sigs/kustomize/releases/download/v2.0.1/kustomize_2.0.1_linux_amd64 -o /usr/bin/kustomize
+      - chmod +x /usr/bin/kustomize
+  - name: slack
+    image: plugins/slack
+    settings:
+      webhook:
+        from_secret: SLACK_WEBHOOK
+      channel: chatbot
+trigger:
+  branch:
+    - master
+  event:
+    - push

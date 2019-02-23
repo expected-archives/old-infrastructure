@@ -33,6 +33,8 @@ spec:
               value: https
             - name: DRONE_TLS_AUTOCERT
               value: "false"
+            - name: DRONE_USER_CREATE
+              value: username:remicaumette,machine:false,admin:true
             - name: DRONE_REPOSITORY_FILTER
               value: expectedsh
             - name: DRONE_USER_FILTER
