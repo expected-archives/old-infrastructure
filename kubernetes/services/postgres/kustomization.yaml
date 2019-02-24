@@ -1,0 +1,14 @@
+namespace: services
+commonLabels:
+  app: postgres
+resources:
+  - deployment.yaml
+  - service.yaml
+  - volume.yaml
+configMapGenerator:
+  - name: postgres
+    files:
+      - config/drone.sh
+imageTags:
+  - name: postgres
+    newTag: "11"
